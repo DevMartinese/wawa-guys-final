@@ -45,7 +45,6 @@ export const GameArena = () => {
         <group key={floorIndex} position-y={floorIndex * -FLOOR_HEIGHT}>
           {[...Array(NB_ROWS)].map((_, rowIndex) => (
             <Fragment key={rowIndex}>
-              {/* Capa principal de hexágonos */}
               <group
                 position-z={rowIndex * HEX_Z_SPACING}
                 position-x={rowIndex % 2 ? HEX_X_SPACING / 2 : 0}
@@ -67,18 +66,17 @@ export const GameArena = () => {
                   />
                 ))}
               </group>
-              {/* Capa adicional debajo solo para capas impares (floorIndex % 2 == 1) */}
               {floorIndex % 2 == 0 && (
                 <group
                   position-z={rowIndex * HEX_Z_SPACING}
                   position-x={rowIndex % 2 ? HEX_X_SPACING / 2 : 0}
-                  position-y={-LAYER_OFFSET} // Desplazamiento hacia abajo para la segunda capa
+                  position-y={-LAYER_OFFSET}
                 >
                   {[...Array(NB_COLUMNS)].map((_, columnIndex) => (
                     <Hexagon
                       key={`double-${columnIndex}`}
                       position-x={columnIndex * HEX_X_SPACING}
-                      color={floor.color} // Puedes cambiar el color para diferenciar las capas si es necesario
+                      color={floor.color}
                       onHit={() => {
                         const hexagonKey = `double-${floorIndex}-${rowIndex}-${columnIndex}`;
                         setHexagonHit((prev) => ({
